@@ -4,6 +4,7 @@ package secp256k1
 
 import (
 	secp256k1 "github.com/btcsuite/btcd/btcec/v2"
+	ecdsa "github.com/btcsuite/btcd/btcec/v2/ecdsa"
 )
 
 // Sign creates an ECDSA signature on curve Secp256k1, using SHA256 on the msg.
