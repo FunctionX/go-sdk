@@ -1,0 +1,32 @@
+syntax = "proto3";
+package erc20.v1;
+
+import "cosmos/msg/v1/msg.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/functionx/go-sdk/erc20";
+
+// Msg defines the erc20 Msg service.
+service Msg {
+  // ConvertERC20 mints a Cosmos coin representation of the ERC20 token contract
+  // that is registered on the token mapping.
+  rpc ConvertERC20(MsgConvertERC20) returns (MsgConvertERC20Response);
+}
+
+// MsgConvertERC20 defines a Msg to convert an ERC20 token to a Cosmos SDK coin.
+message MsgConvertERC20 {
+  // ERC20 token contract address registered on erc20 bridge
+  string contract_address = 1;
+  // amount of ERC20 tokens to mint
+  string amount = 2 [
+    (gogoproto.customtype) = "github.com/functionx/go-sdk/cosmos/types.Int",
+    (gogoproto.nullable) = false
+  ];
+  // bech32 address to receive SDK coins.
+  string receiver = 3;
+  // sender hex address from the owner of the given ERC20 tokens
+  string sender = 4;
+}
+
+// MsgConvertERC20Response returns no fields
+message MsgConvertERC20Response {}

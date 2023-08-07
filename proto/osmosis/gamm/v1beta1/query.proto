@@ -1,0 +1,27 @@
+syntax = "proto3";
+package osmosis.gamm.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "cosmos_proto/cosmos.proto";
+import "cosmos/base/v1beta1/coin.proto";
+
+option go_package = "github.com/functionx/go-sdk/osmosis/gamm";
+
+service Query {
+  rpc CalcExitPoolCoinsFromShares(QueryCalcExitPoolCoinsFromSharesRequest)returns (QueryCalcExitPoolCoinsFromSharesResponse) {}
+}
+
+//=============================== CalcExitPoolCoinsFromShares
+message QueryCalcExitPoolCoinsFromSharesRequest {
+  uint64 pool_id = 1;
+  string share_in_amount = 2 [
+    (gogoproto.customtype) = "github.com/functionx/go-sdk/cosmos/types.Int",
+    (gogoproto.nullable) = false
+  ];
+}
+message QueryCalcExitPoolCoinsFromSharesResponse {
+  repeated cosmos.base.v1beta1.Coin tokens_out = 1 [
+    (gogoproto.castrepeated) = "github.com/functionx/go-sdk/cosmos/types.Coins",
+    (gogoproto.nullable) = false
+  ];
+}

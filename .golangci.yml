@@ -1,0 +1,39 @@
+run:
+  # Timeout for analysis, e.g. 30s, 5m.
+  # Default: 1m
+  timeout: 5m
+
+  # Include test files or not.
+  # Default: true
+  tests: true
+
+  # Define the Go version limit.
+  # Mainly related to generics support since go1.20.
+  # Default: use Go version from the go.mod file, fallback on the env var `GOVERSION`, fallback on 1.20
+  go: '1.20'
+
+linters:
+  enable:
+    - gofumpt
+    - unconvert
+    - unparam
+    - stylecheck
+    - gocyclo
+    - errorlint
+    - prealloc
+    - gosec
+    - gocritic
+
+linters-settings:
+  stylecheck:
+    checks: [ "all", "-ST1003" ]
+  gocyclo:
+    min-complexity: 15
+  govet:
+    disable:
+      - loopclosure
+  gosec:
+    excludes: [ "G108" ]
+  staticcheck:
+    checks: [ "all", "-SA1019" ]
+

@@ -1,0 +1,23 @@
+syntax = "proto3";
+package osmosis.poolmanager.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "osmosis/poolmanager/v1beta1/swap_route.proto";
+
+option go_package = "github.com/functionx/go-sdk/osmosis/poolmanager";
+
+// ===================== MsgSwapExactAmountIn
+message MsgSwapExactAmountIn {
+  string sender = 1 [(gogoproto.moretags) = "yaml:\"sender\""];
+  repeated SwapAmountInRoute routes = 2 [(gogoproto.nullable) = false];
+  cosmos.base.v1beta1.Coin token_in = 3 [
+    (gogoproto.moretags) = "yaml:\"token_in\"",
+    (gogoproto.nullable) = false
+  ];
+  string token_out_min_amount = 4 [
+    (gogoproto.customtype) = "github.com/functionx/go-sdk/cosmos/types.Int",
+    (gogoproto.moretags) = "yaml:\"token_out_min_amount\"",
+    (gogoproto.nullable) = false
+  ];
+}
