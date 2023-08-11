@@ -20,3 +20,18 @@ func NewMsgConvertERC20(
 func (msg *MsgConvertERC20) GetSigners() []types.AccAddress {
 	return []types.AccAddress{types.MustAccAddressFromBech32(msg.Sender)}
 }
+
+func NewMsgConvertDenom(
+	sender, receiver, target string, amount types.Coin,
+) *MsgConvertDenom {
+	return &MsgConvertDenom{
+		Sender:   sender,
+		Receiver: receiver,
+		Coin:     amount,
+		Target:   target,
+	}
+}
+
+func (msg *MsgConvertDenom) GetSigners() []types.AccAddress {
+	return []types.AccAddress{types.MustAccAddressFromBech32(msg.Sender)}
+}
