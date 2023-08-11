@@ -3,6 +3,7 @@ package erc20.v1;
 
 import "cosmos/msg/v1/msg.proto";
 import "gogoproto/gogo.proto";
+import "cosmos/base/v1beta1/coin.proto";
 
 option go_package = "github.com/functionx/go-sdk/erc20";
 
@@ -11,6 +12,8 @@ service Msg {
   // ConvertERC20 mints a Cosmos coin representation of the ERC20 token contract
   // that is registered on the token mapping.
   rpc ConvertERC20(MsgConvertERC20) returns (MsgConvertERC20Response);
+
+  rpc ConvertDenom(MsgConvertDenom) returns (MsgConvertDenomResponse);
 }
 
 // MsgConvertERC20 defines a Msg to convert an ERC20 token to a Cosmos SDK coin.
@@ -30,3 +33,16 @@ message MsgConvertERC20 {
 
 // MsgConvertERC20Response returns no fields
 message MsgConvertERC20Response {}
+
+message MsgConvertDenom {
+  // msg sender
+  string sender = 1;
+  // receiver address
+  string receiver = 2;
+  // coin to convert
+  cosmos.base.v1beta1.Coin coin = 3 [(gogoproto.castrepeated) = "github.com/functionx/go-sdk/cosmos/types.Coins",(gogoproto.nullable) = false];
+  // target denom
+  string target = 4;
+}
+
+message MsgConvertDenomResponse {}
