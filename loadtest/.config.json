@@ -1,5 +1,5 @@
 {
-  "client_factory": "msg_order",
+  "client_factory": "msg_send",
   "connections": 1,
   "time": 300,
   "send_period": 1,

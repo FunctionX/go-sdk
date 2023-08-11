@@ -3,10 +3,12 @@ package loadtest
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"os"
 	"strings"
 
 	sdkmath "cosmossdk.io/math"
+	"github.com/gogo/protobuf/proto"
 	"github.com/pkg/errors"
 
 	"github.com/functionx/go-sdk/cosmos"
@@ -16,11 +18,12 @@ import (
 )
 
 type BaseInfo struct {
-	Accounts *Accounts
-	ChainID  string
-	GasPrice cosmostypes.DecCoin
-	GasLimit int64
-	Memo     string
+	Accounts       *Accounts
+	ChainID        string
+	GasPrice       cosmostypes.DecCoin
+	GasLimit       int64
+	Memo           string
+	EnableSequence bool
 }
 
 func newBaseInfo(accounts *Accounts, chainId, denom string) *BaseInfo {
@@ -29,21 +32,45 @@ func newBaseInfo(accounts *Accounts, chainId, denom string) *BaseInfo {
 		ChainID:  chainId,
 		GasPrice: cosmostypes.NewDecCoinFromDec(denom, sdkmath.LegacyNewDec(0)),
 		GasLimit: 100_000,
-		Memo:     "",
+		Memo:     fmt.Sprintf("loadtest_%s", chainId),
 	}
 }
 
-func (i *BaseInfo) GetDenom() string {
-	return i.GasPrice.Denom
+func (b *BaseInfo) GetDenom() string {
+	return b.GasPrice.Denom
 }
 
-func NewBaseInfo(str string, keyDir string) (*BaseInfo, error) {
-	if strings.HasSuffix(str, "config/genesis.json") {
-		return NewBaseInfoFromGenesis(str, keyDir)
+func (b *BaseInfo) BuildTx(account *Account, msgs []cosmostypes.Msg) ([]byte, error) {
+	if b.Accounts.IsFistAccount() {
+		b.GasLimit--
 	}
-	if strings.Contains(str, "://") {
-		newClient := client.NewClient(str, cosmos.NewProtoCodec())
-		grpcCli := grpc.NewClient(context.Background(), newClient)
+	txRaw, err := cosmos.BuildTxV1(
+		b.ChainID, account.Sequence, account.AccountNumber, account.PrivKey,
+		msgs, b.GasPrice, b.GasLimit, b.Memo, 0,
+	)
+	if err != nil {
+		return nil, err
+	}
+	if b.EnableSequence {
+		account.Sequence++
+	}
+	txRawData, err := proto.Marshal(txRaw)
+	if err != nil {
+		return nil, err
+	}
+	return txRawData, nil
+}
+
+func NewBaseInfo(genesisOrUrl string, keyDir string) (*BaseInfo, error) {
+	if strings.HasSuffix(genesisOrUrl, "config/genesis.json") {
+		return NewBaseInfoFromGenesis(genesisOrUrl, keyDir)
+	}
+	if strings.Contains(genesisOrUrl, "://") {
+		grpcCli, err := grpc.DialContext(context.Background(), genesisOrUrl)
+		if err != nil {
+			newClient := client.NewClient(genesisOrUrl, cosmos.NewProtoCodec())
+			grpcCli = grpc.NewClient(context.Background(), newClient)
+		}
 		return NewBaseInfoFromClient(grpcCli, keyDir)
 	} else {
 		return nil, errors.New("invalid base info")

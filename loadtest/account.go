@@ -22,7 +22,9 @@ import (
 )
 
 type Account struct {
-	PrivateKey    crypto.PrivKey `json:"-"`
+	PrivKey       crypto.PrivKey `json:"-"`
+	PrivateKey    string         `json:"private_key"`
+	KeyType       string         `json:"key_type"`
 	Mnemonic      string         `json:"mnemonic"`
 	Address       string         `json:"address"`
 	AccountNumber uint64         `json:"-"`
@@ -193,25 +195,34 @@ func newAccount(keyFile string, prefix string) (*Account, error) {
 	if err = json.Unmarshal(bz, &account); err != nil {
 		return nil, err
 	}
-	if account.Mnemonic == "" {
-		return nil, errors.New("invalid mnemonic")
-	}
+
 	var privBz []byte
-	privBz, err = hd.Derive(account.Mnemonic, "", hd.CreateHDPath(118, 0, 0).String())
-	if err != nil {
-		return nil, err
+	if account.PrivateKey != "" {
+		privBz = common.FromHex(account.PrivateKey)
+	} else {
+		if account.Mnemonic == "" {
+			return nil, errors.New("private key and mnemonic are both empty")
+		}
+		coinType := uint32(118)
+		if account.KeyType == string(ethsecp256k1.KeyType) {
+			coinType = 60
+		}
+		privBz, err = hd.Derive(account.Mnemonic, "", hd.CreateHDPath(coinType, 0, 0).String())
+		if err != nil {
+			return nil, err
+		}
 	}
 
-	if prefix != "" && prefix != "0x" {
-		account.PrivateKey = &secp256k1.PrivKey{Key: privBz}
-		accAddress := cosmostypes.NewAccAddress(account.PrivateKey.PubKey().Address(), prefix)
+	if prefix == "0x" || account.KeyType == string(ethsecp256k1.KeyType) {
+		account.PrivKey = &ethsecp256k1.PrivKey{Key: privBz}
+		accAddress := common.BytesToAddress(account.PrivKey.PubKey().Address())
 		if account.Address != "" && account.Address != accAddress.String() {
 			return nil, errors.Errorf("address not match expected: %s actual: %s", account.Address, accAddress.String())
 		}
 		account.Address = accAddress.String()
 	} else {
-		account.PrivateKey = &ethsecp256k1.PrivKey{Key: privBz}
-		accAddress := common.BytesToAddress(account.PrivateKey.PubKey().Address())
+		account.PrivKey = &secp256k1.PrivKey{Key: privBz}
+		accAddress := cosmostypes.NewAccAddress(account.PrivKey.PubKey().Address(), prefix)
 		if account.Address != "" && account.Address != accAddress.String() {
 			return nil, errors.Errorf("address not match expected: %s actual: %s", account.Address, accAddress.String())
 		}

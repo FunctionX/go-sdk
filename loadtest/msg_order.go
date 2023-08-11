@@ -4,10 +4,8 @@ import (
 	"fmt"
 
 	sdkmath "cosmossdk.io/math"
-	"github.com/gogo/protobuf/proto"
 	"github.com/informalsystems/tm-load-test/pkg/loadtest"
 
-	"github.com/functionx/go-sdk/cosmos"
 	cosmostypes "github.com/functionx/go-sdk/cosmos/types"
 	"github.com/functionx/go-sdk/marginx"
 )
@@ -32,7 +30,7 @@ func (c *MsgOrderClientFactory) Name() string {
 	return "msg_order"
 }
 
-func (c *MsgOrderClientFactory) ValidateConfig(cfg loadtest.Config) error {
+func (c *MsgOrderClientFactory) ValidateConfig(_ loadtest.Config) error {
 	return nil
 }
 
@@ -86,24 +84,5 @@ func (c *MsgOrderClientFactory) GenerateTx() ([]byte, error) {
 			Leverage:     1,
 		},
 	}
-	if c.Accounts.IsFistAccount() {
-		c.GasLimit--
-	}
-	txRaw, err := cosmos.BuildTxV1(
-		c.ChainID, account.Sequence, account.AccountNumber, account.PrivateKey,
-		msgs, c.GasPrice, c.GasLimit, c.Memo, 0,
-	)
-	if err != nil {
-		return nil, err
-	}
-
-	// account.Sequence++
-	txRawData, err := proto.Marshal(txRaw)
-	if err != nil {
-		return nil, err
-	}
-	// if account.AccountNumber%1000 == 0 {
-	// 	fmt.Println("txHash: ", fmt.Sprintf("%X", cosmoscrypto.Sum(txRawData)))
-	// }
-	return txRawData, nil
+	return c.BuildTx(account, msgs)
 }
