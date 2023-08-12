@@ -29,7 +29,8 @@ func NewConfigDecoder(output interface{}) *mapstructure.Decoder {
 	return decoder
 }
 
-//gocyclo:ignore
+// CustomDecodeHook is a custom decode hook for mapstructure
+// gocyclo:ignore
 func CustomDecodeHook() mapstructure.DecodeHookFunc {
 	return mapstructure.ComposeDecodeHookFunc(
 		func(f reflect.Type, t reflect.Type, data interface{}) (interface{}, error) {

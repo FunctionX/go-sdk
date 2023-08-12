@@ -60,7 +60,7 @@ func (s *Server) Start(group *errgroup.Group, ctx context.Context) error {
 		return ctx
 	}
 	group.Go(func() error {
-		if err := s.pprof.ListenAndServe(); err != http.ErrServerClosed {
+		if err := s.pprof.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
 			s.logger.Error("pprof HTTP server listen", "error", err)
 			return errors.Wrap(err, "failed to start pprof HTTP server")
 		}

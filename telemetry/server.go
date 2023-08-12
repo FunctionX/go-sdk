@@ -109,7 +109,7 @@ func (s *Server) Start(group *errgroup.Group, ctx context.Context) error {
 	}
 
 	group.Go(func() error {
-		if err := s.prometheus.ListenAndServe(); err != http.ErrServerClosed {
+		if err := s.prometheus.ListenAndServe(); !errors.Is(err, http.ErrServerClosed) {
 			// Error starting or closing listener:
 			s.logger.Error("prometheus HTTP server listen", "error", err)
 			return errors.Wrap(err, "failed to start Prometheus HTTP server")
