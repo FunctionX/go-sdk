@@ -5,13 +5,13 @@ package tx
 
 import (
 	fmt "fmt"
+	_ "github.com/cosmos/gogoproto/gogoproto"
+	proto "github.com/cosmos/gogoproto/proto"
 	crypto "github.com/functionx/go-sdk/cosmos/crypto"
 	github_com_functionx_go_sdk_cosmos_types "github.com/functionx/go-sdk/cosmos/types"
 	types "github.com/functionx/go-sdk/cosmos/types"
 	signing "github.com/functionx/go-sdk/cosmos/types/tx/signing"
 	_ "github.com/functionx/go-sdk/proto"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -358,7 +358,8 @@ type TxBody struct {
 	Messages []*types.Any `protobuf:"bytes,1,rep,name=messages,proto3" json:"messages,omitempty"`
 	// memo is any arbitrary note/comment to be added to the transaction.
 	// WARNING: in clients, any publicly exposed text should not be called memo,
-	// but should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).
+	// but should be called `note` instead (see
+	// https://github.com/cosmos/cosmos-sdk/issues/9122).
 	Memo string `protobuf:"bytes,2,opt,name=memo,proto3" json:"memo,omitempty"`
 	// timeout is the block height after which this transaction will not
 	// be processed by the chain
@@ -593,6 +594,7 @@ type ModeInfo struct {
 	// multisig signer
 	//
 	// Types that are valid to be assigned to Sum:
+	//
 	//	*ModeInfo_Single_
 	//	*ModeInfo_Multi_
 	Sum isModeInfo_Sum `protobuf_oneof:"sum"`
@@ -789,13 +791,15 @@ type Fee struct {
 	// gas_limit is the maximum gas that can be used in transaction processing
 	// before an out of gas error occurs
 	GasLimit uint64 `protobuf:"varint,2,opt,name=gas_limit,json=gasLimit,proto3" json:"gas_limit,omitempty"`
-	// if unset, the first signer is responsible for paying the fees. If set, the specified account must pay the fees.
-	// the payer must be a tx signer (and thus have signed this field in AuthInfo).
-	// setting this field does *not* change the ordering of required signers for the transaction.
+	// if unset, the first signer is responsible for paying the fees. If set, the
+	// specified account must pay the fees. the payer must be a tx signer (and
+	// thus have signed this field in AuthInfo). setting this field does *not*
+	// change the ordering of required signers for the transaction.
 	Payer string `protobuf:"bytes,3,opt,name=payer,proto3" json:"payer,omitempty"`
-	// if set, the fee payer (either the first signer or the value of the payer field) requests that a fee grant be used
-	// to pay fees instead of the fee payer's own balance. If an appropriate fee grant does not exist or the chain does
-	// not support fee grants, this will fail
+	// if set, the fee payer (either the first signer or the value of the payer
+	// field) requests that a fee grant be used to pay fees instead of the fee
+	// payer's own balance. If an appropriate fee grant does not exist or the
+	// chain does not support fee grants, this will fail
 	Granter string `protobuf:"bytes,4,opt,name=granter,proto3" json:"granter,omitempty"`
 }
 

@@ -6,7 +6,7 @@ import "gogoproto/gogo.proto";
 option go_package = "github.com/functionx/go-sdk/osmosis/poolmanager";
 
 message SwapAmountInRoute {
-  uint64 pool_id = 1 [(gogoproto.moretags) = "yaml:\"pool_id\""];
+  uint64 pool_id = 1 [ (gogoproto.moretags) = "yaml:\"pool_id\"" ];
   string token_out_denom = 2
-  [(gogoproto.moretags) = "yaml:\"token_out_denom\""];
+      [ (gogoproto.moretags) = "yaml:\"token_out_denom\"" ];
 }

@@ -5,12 +5,12 @@ package bank
 
 import (
 	fmt "fmt"
+	_ "github.com/cosmos/gogoproto/gogoproto"
+	proto "github.com/cosmos/gogoproto/proto"
 	github_com_functionx_go_sdk_cosmos_types "github.com/functionx/go-sdk/cosmos/types"
 	types "github.com/functionx/go-sdk/cosmos/types"
 	_ "github.com/functionx/go-sdk/cosmos/types/msgservice"
 	_ "github.com/functionx/go-sdk/proto"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -343,12 +343,13 @@ type Metadata struct {
 	//
 	// Since: cosmos-sdk 0.43
 	Symbol string `protobuf:"bytes,6,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	// URI to a document (on or off-chain) that contains additional information. Optional.
+	// URI to a document (on or off-chain) that contains additional information.
+	// Optional.
 	//
 	// Since: cosmos-sdk 0.46
 	URI string `protobuf:"bytes,7,opt,name=uri,proto3" json:"uri,omitempty"`
-	// URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
-	// the document didn't change. Optional.
+	// URIHash is a sha256 hash of a document pointed by URI. It's used to verify
+	// that the document didn't change. Optional.
 	//
 	// Since: cosmos-sdk 0.46
 	URIHash string `protobuf:"bytes,8,opt,name=uri_hash,json=uriHash,proto3" json:"uri_hash,omitempty"`

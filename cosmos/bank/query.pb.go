@@ -6,13 +6,13 @@ package bank
 import (
 	context "context"
 	fmt "fmt"
+	_ "github.com/cosmos/gogoproto/gogoproto"
+	grpc1 "github.com/cosmos/gogoproto/grpc"
+	proto "github.com/cosmos/gogoproto/proto"
 	github_com_functionx_go_sdk_cosmos_types "github.com/functionx/go-sdk/cosmos/types"
 	types "github.com/functionx/go-sdk/cosmos/types"
 	query "github.com/functionx/go-sdk/cosmos/types/query"
 	_ "github.com/functionx/go-sdk/proto"
-	_ "github.com/gogo/protobuf/gogoproto"
-	grpc1 "github.com/gogo/protobuf/grpc"
-	proto "github.com/gogo/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -260,8 +260,8 @@ func (m *QuerySpendableBalancesRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_QuerySpendableBalancesRequest proto.InternalMessageInfo
 
-// QuerySpendableBalancesResponse defines the gRPC response structure for querying
-// an account's spendable balances.
+// QuerySpendableBalancesResponse defines the gRPC response structure for
+// querying an account's spendable balances.
 //
 // Since: cosmos-sdk 0.46
 type QuerySpendableBalancesResponse struct {
@@ -592,7 +592,8 @@ func (m *QueryParamsResponse) GetParams() Params {
 	return Params{}
 }
 
-// QueryDenomsMetadataRequest is the request type for the Query/DenomsMetadata RPC method.
+// QueryDenomsMetadataRequest is the request type for the Query/DenomsMetadata
+// RPC method.
 type QueryDenomsMetadataRequest struct {
 	// pagination defines an optional pagination for the request.
 	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
@@ -638,8 +639,8 @@ func (m *QueryDenomsMetadataRequest) GetPagination() *query.PageRequest {
 	return nil
 }
 
-// QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC
-// method.
+// QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata
+// RPC method.
 type QueryDenomsMetadataResponse struct {
 	// metadata provides the client information for all the registered tokens.
 	Metadatas []Metadata `protobuf:"bytes,1,rep,name=metadatas,proto3" json:"metadatas"`
@@ -694,7 +695,8 @@ func (m *QueryDenomsMetadataResponse) GetPagination() *query.PageResponse {
 	return nil
 }
 
-// QueryDenomMetadataRequest is the request type for the Query/DenomMetadata RPC method.
+// QueryDenomMetadataRequest is the request type for the Query/DenomMetadata RPC
+// method.
 type QueryDenomMetadataRequest struct {
 	// denom is the coin denom to query the metadata for.
 	Denom string `protobuf:"bytes,1,opt,name=denom,proto3" json:"denom,omitempty"`
@@ -740,10 +742,11 @@ func (m *QueryDenomMetadataRequest) GetDenom() string {
 	return ""
 }
 
-// QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC
-// method.
+// QueryDenomMetadataResponse is the response type for the Query/DenomMetadata
+// RPC method.
 type QueryDenomMetadataResponse struct {
-	// metadata describes and provides all the client information for the requested token.
+	// metadata describes and provides all the client information for the
+	// requested token.
 	Metadata Metadata `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata"`
 }
 
@@ -787,9 +790,9 @@ func (m *QueryDenomMetadataResponse) GetMetadata() Metadata {
 	return Metadata{}
 }
 
-// QueryDenomOwnersRequest defines the request type for the DenomOwners RPC query,
-// which queries for a paginated set of all account holders of a particular
-// denomination.
+// QueryDenomOwnersRequest defines the request type for the DenomOwners RPC
+// query, which queries for a paginated set of all account holders of a
+// particular denomination.
 type QueryDenomOwnersRequest struct {
 	// denom defines the coin denomination to query all account holders for.
 	Denom string `protobuf:"bytes,1,opt,name=denom,proto3" json:"denom,omitempty"`

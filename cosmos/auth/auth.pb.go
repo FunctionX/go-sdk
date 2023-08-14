@@ -5,10 +5,10 @@ package auth
 
 import (
 	fmt "fmt"
+	_ "github.com/cosmos/gogoproto/gogoproto"
+	proto "github.com/cosmos/gogoproto/proto"
 	types "github.com/functionx/go-sdk/cosmos/types"
 	_ "github.com/functionx/go-sdk/proto"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
 	io "io"
 	math "math"
 	math_bits "math/bits"

@@ -1,0 +1,37 @@
+syntax = "proto3";
+package fx.dex.v1;
+
+import "gogoproto/gogo.proto";
+import "fx/dex/v1/order.proto";
+import "cosmos/base/v1beta1/coin.proto";
+
+option go_package = "github.com/functionx/go-sdk/marginx";
+
+service Msg {
+  rpc CreateOrder(MsgCreateOrder) returns (MsgCreateOrderResponse);
+  rpc CancelOrder(MsgCancelOrder) returns (MsgCancelOrderResponse);
+}
+
+message MsgCreateOrder {
+  string owner = 1;
+  string pair_id = 2;
+  Direction direction = 3;
+  string price = 4 [
+    (gogoproto.customtype) = "github.com/functionx/go-sdk/cosmos/types.Dec",
+    (gogoproto.nullable) = false
+  ];
+  string base_quantity = 5 [
+    (gogoproto.customtype) = "github.com/functionx/go-sdk/cosmos/types.Dec",
+    (gogoproto.nullable) = false
+  ];
+  int64 leverage = 6;
+}
+
+message MsgCreateOrderResponse { string order_id = 1; }
+
+message MsgCancelOrder {
+  string owner = 1;
+  string order_id = 2;
+}
+
+message MsgCancelOrderResponse {}

@@ -40,7 +40,10 @@ message MsgConvertDenom {
   // receiver address
   string receiver = 2;
   // coin to convert
-  cosmos.base.v1beta1.Coin coin = 3 [(gogoproto.castrepeated) = "github.com/functionx/go-sdk/cosmos/types.Coins",(gogoproto.nullable) = false];
+  cosmos.base.v1beta1.Coin coin = 3 [
+    (gogoproto.castrepeated) = "github.com/functionx/go-sdk/cosmos/types.Coins",
+    (gogoproto.nullable) = false
+  ];
   // target denom
   string target = 4;
 }

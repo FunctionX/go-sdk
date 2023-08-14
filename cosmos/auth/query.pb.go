@@ -6,12 +6,12 @@ package auth
 import (
 	context "context"
 	fmt "fmt"
+	_ "github.com/cosmos/gogoproto/gogoproto"
+	grpc1 "github.com/cosmos/gogoproto/grpc"
+	proto "github.com/cosmos/gogoproto/proto"
 	types "github.com/functionx/go-sdk/cosmos/types"
 	query "github.com/functionx/go-sdk/cosmos/types/query"
 	_ "github.com/functionx/go-sdk/proto"
-	_ "github.com/gogo/protobuf/gogoproto"
-	grpc1 "github.com/gogo/protobuf/grpc"
-	proto "github.com/gogo/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -304,7 +304,8 @@ func (m *QueryParamsResponse) GetParams() Params {
 	return Params{}
 }
 
-// QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method.
+// QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts
+// RPC method.
 //
 // Since: cosmos-sdk 0.46
 type QueryModuleAccountsRequest struct {
@@ -343,7 +344,8 @@ func (m *QueryModuleAccountsRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_QueryModuleAccountsRequest proto.InternalMessageInfo
 
-// QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method.
+// QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts
+// RPC method.
 //
 // Since: cosmos-sdk 0.46
 type QueryModuleAccountsResponse struct {
@@ -390,7 +392,8 @@ func (m *QueryModuleAccountsResponse) GetAccounts() []*types.Any {
 	return nil
 }
 
-// QueryModuleAccountByNameRequest is the request type for the Query/ModuleAccountByName RPC method.
+// QueryModuleAccountByNameRequest is the request type for the
+// Query/ModuleAccountByName RPC method.
 type QueryModuleAccountByNameRequest struct {
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 }
@@ -435,7 +438,8 @@ func (m *QueryModuleAccountByNameRequest) GetName() string {
 	return ""
 }
 
-// QueryModuleAccountByNameResponse is the response type for the Query/ModuleAccountByName RPC method.
+// QueryModuleAccountByNameResponse is the response type for the
+// Query/ModuleAccountByName RPC method.
 type QueryModuleAccountByNameResponse struct {
 	Account *types.Any `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
 }
@@ -613,7 +617,8 @@ func (m *AddressBytesToStringRequest) GetAddressBytes() []byte {
 	return nil
 }
 
-// AddressBytesToStringResponse is the response type for AddressString rpc method.
+// AddressBytesToStringResponse is the response type for AddressString rpc
+// method.
 //
 // Since: cosmos-sdk 0.46
 type AddressBytesToStringResponse struct {
@@ -707,7 +712,8 @@ func (m *AddressStringToBytesRequest) GetAddressString() string {
 	return ""
 }
 
-// AddressStringToBytesResponse is the response type for AddressBytes rpc method.
+// AddressStringToBytesResponse is the response type for AddressBytes rpc
+// method.
 //
 // Since: cosmos-sdk 0.46
 type AddressStringToBytesResponse struct {
@@ -754,7 +760,8 @@ func (m *AddressStringToBytesResponse) GetAddressBytes() []byte {
 	return nil
 }
 
-// QueryAccountAddressByIDRequest is the request type for AccountAddressByID rpc method
+// QueryAccountAddressByIDRequest is the request type for AccountAddressByID rpc
+// method
 //
 // Since: cosmos-sdk 0.46.2
 type QueryAccountAddressByIDRequest struct {
@@ -804,7 +811,8 @@ func (m *QueryAccountAddressByIDRequest) GetId() int64 {
 	return 0
 }
 
-// QueryAccountAddressByIDResponse is the response type for AccountAddressByID rpc method
+// QueryAccountAddressByIDResponse is the response type for AccountAddressByID
+// rpc method
 //
 // Since: cosmos-sdk 0.46.2
 type QueryAccountAddressByIDResponse struct {

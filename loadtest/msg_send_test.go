@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	sdkmath "cosmossdk.io/math"
-	"github.com/gogo/protobuf/proto"
+	"github.com/cosmos/gogoproto/proto"
 	"github.com/informalsystems/tm-load-test/pkg/loadtest"
 	"github.com/stretchr/testify/assert"
 

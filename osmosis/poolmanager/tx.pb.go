@@ -5,10 +5,10 @@ package poolmanager
 
 import (
 	fmt "fmt"
+	_ "github.com/cosmos/gogoproto/gogoproto"
+	proto "github.com/cosmos/gogoproto/proto"
 	github_com_functionx_go_sdk_cosmos_types "github.com/functionx/go-sdk/cosmos/types"
 	types "github.com/functionx/go-sdk/cosmos/types"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
 	io "io"
 	math "math"
 	math_bits "math/bits"

@@ -10,14 +10,15 @@ option go_package = "github.com/functionx/go-sdk/osmosis/poolmanager";
 
 service Query {
   // Estimates swap amount out given in.
-  rpc EstimateSwapExactAmountIn(EstimateSwapExactAmountInRequest)returns (EstimateSwapExactAmountInResponse) {}
+  rpc EstimateSwapExactAmountIn(EstimateSwapExactAmountInRequest)
+      returns (EstimateSwapExactAmountInResponse) {}
 }
 
 //=============================== EstimateSwapExactAmountIn
 message EstimateSwapExactAmountInRequest {
-  string sender = 1 [(gogoproto.moretags) = "yaml:\"sender\""];
-  uint64 pool_id = 2 [(gogoproto.moretags) = "yaml:\"pool_id\""];
-  string token_in = 3 [(gogoproto.moretags) = "yaml:\"token_in\""];
+  string sender = 1 [ (gogoproto.moretags) = "yaml:\"sender\"" ];
+  uint64 pool_id = 2 [ (gogoproto.moretags) = "yaml:\"pool_id\"" ];
+  string token_in = 3 [ (gogoproto.moretags) = "yaml:\"token_in\"" ];
   repeated SwapAmountInRoute routes = 4 [
     (gogoproto.moretags) = "yaml:\"routes\"",
     (gogoproto.nullable) = false

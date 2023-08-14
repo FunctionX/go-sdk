@@ -17,6 +17,4 @@ service Service {
 message ConfigRequest {}
 
 // ConfigResponse defines the response structure for the Config gRPC query.
-message ConfigResponse {
-  string minimum_gas_price = 1;
-}
+message ConfigResponse { string minimum_gas_price = 1; }

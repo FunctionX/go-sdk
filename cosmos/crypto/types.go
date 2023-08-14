@@ -3,7 +3,7 @@ package crypto
 import (
 	"crypto/sha256"
 
-	"github.com/gogo/protobuf/proto"
+	"github.com/cosmos/gogoproto/proto"
 
 	"github.com/functionx/go-sdk/tendermint/bytes"
 )

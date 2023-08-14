@@ -11,9 +11,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/gogo/protobuf/jsonpb"
-	"github.com/gogo/protobuf/proto"
-	"github.com/gogo/protobuf/protoc-gen-gogo/descriptor"
+	"github.com/cosmos/gogoproto/jsonpb"
+	"github.com/cosmos/gogoproto/proto"
+	"github.com/cosmos/gogoproto/protoc-gen-gogo/descriptor"
 	"google.golang.org/protobuf/encoding/protowire"
 
 	"github.com/functionx/go-sdk/cosmos/types"

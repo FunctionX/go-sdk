@@ -3,7 +3,7 @@ package abci
 import (
 	bytes2 "bytes"
 
-	"github.com/gogo/protobuf/jsonpb"
+	"github.com/cosmos/gogoproto/jsonpb"
 
 	"github.com/functionx/go-sdk/tendermint/bytes"
 )

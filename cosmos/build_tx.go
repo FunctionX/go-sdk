@@ -1,7 +1,7 @@
 package cosmos
 
 import (
-	"github.com/gogo/protobuf/proto"
+	"github.com/cosmos/gogoproto/proto"
 
 	"github.com/functionx/go-sdk/cosmos/auth"
 	cosmoscrypto "github.com/functionx/go-sdk/cosmos/crypto"

@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	sdkmath "cosmossdk.io/math"
-	"github.com/gogo/protobuf/proto"
+	"github.com/cosmos/gogoproto/proto"
 	"github.com/pkg/errors"
 
 	"github.com/functionx/go-sdk/cosmos"

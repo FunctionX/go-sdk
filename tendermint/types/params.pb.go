@@ -5,10 +5,10 @@ package types
 
 import (
 	fmt "fmt"
+	_ "github.com/cosmos/gogoproto/gogoproto"
+	proto "github.com/cosmos/gogoproto/proto"
+	github_com_cosmos_gogoproto_types "github.com/cosmos/gogoproto/types"
 	_ "github.com/functionx/go-sdk/proto"
-	_ "github.com/gogo/protobuf/gogoproto"
-	proto "github.com/gogo/protobuf/proto"
-	github_com_gogo_protobuf_types "github.com/gogo/protobuf/types"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -179,8 +179,8 @@ type EvidenceParams struct {
 	// mechanism for handling [Nothing-At-Stake
 	// attacks](https://github.com/ethereum/wiki/wiki/Proof-of-Stake-FAQ#what-is-the-nothing-at-stake-problem-and-how-can-it-be-fixed).
 	MaxAgeDuration time.Duration `protobuf:"bytes,2,opt,name=max_age_duration,json=maxAgeDuration,proto3,stdduration" json:"max_age_duration"`
-	// This sets the maximum size of total evidence in bytes that can be committed in a single block.
-	// and should fall comfortably under the max block bytes.
+	// This sets the maximum size of total evidence in bytes that can be committed
+	// in a single block. and should fall comfortably under the max block bytes.
 	// Default is 1048576 or 1MB
 	MaxBytes int64 `protobuf:"varint,3,opt,name=max_bytes,json=maxBytes,proto3" json:"max_bytes,omitempty"`
 }
@@ -733,7 +733,7 @@ func (m *EvidenceParams) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i--
 		dAtA[i] = 0x18
 	}
-	n5, err5 := github_com_gogo_protobuf_types.StdDurationMarshalTo(m.MaxAgeDuration, dAtA[i-github_com_gogo_protobuf_types.SizeOfStdDuration(m.MaxAgeDuration):])
+	n5, err5 := github_com_cosmos_gogoproto_types.StdDurationMarshalTo(m.MaxAgeDuration, dAtA[i-github_com_cosmos_gogoproto_types.SizeOfStdDuration(m.MaxAgeDuration):])
 	if err5 != nil {
 		return 0, err5
 	}
@@ -989,7 +989,7 @@ func (m *EvidenceParams) Size() (n int) {
 	if m.MaxAgeNumBlocks != 0 {
 		n += 1 + sovParams(uint64(m.MaxAgeNumBlocks))
 	}
-	l = github_com_gogo_protobuf_types.SizeOfStdDuration(m.MaxAgeDuration)
+	l = github_com_cosmos_gogoproto_types.SizeOfStdDuration(m.MaxAgeDuration)
 	n += 1 + l + sovParams(uint64(l))
 	if m.MaxBytes != 0 {
 		n += 1 + sovParams(uint64(m.MaxBytes))
@@ -1411,7 +1411,7 @@ func (m *EvidenceParams) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := github_com_gogo_protobuf_types.StdDurationUnmarshal(&m.MaxAgeDuration, dAtA[iNdEx:postIndex]); err != nil {
+			if err := github_com_cosmos_gogoproto_types.StdDurationUnmarshal(&m.MaxAgeDuration, dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

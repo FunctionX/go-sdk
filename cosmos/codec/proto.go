@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gogo/protobuf/jsonpb"
-	gogoproto "github.com/gogo/protobuf/proto"
+	"github.com/cosmos/gogoproto/jsonpb"
+	gogoproto "github.com/cosmos/gogoproto/proto"
 	legacyproto "github.com/golang/protobuf/proto" //nolint:staticcheck
 	"google.golang.org/grpc/encoding"
 	"google.golang.org/protobuf/proto"

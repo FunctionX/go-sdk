@@ -46,5 +46,19 @@ test-count:
 ###                                Protobuf                                 ###
 ###############################################################################
 
+protoVer=0.13.5
+protoImageName=ghcr.io/cosmos/proto-builder:$(protoVer)
+protoImage=docker run --rm -v $(CURDIR):/workspace --workdir /workspace $(protoImageName)
+
+proto-all: proto-format proto-lint proto-gen
+
+proto-format:
+	@$(protoImage) find ./ -name "*.proto" -exec clang-format -i {} \;
+
+proto-lint:
+	@$(protoImage) buf lint ./proto
+
 proto-gen:
-	docker run --rm -v $(CURDIR):/workspace --workdir /workspace tendermintdev/sdk-proto-gen:v0.7 sh ./proto/run.sh
+	@$(protoImage) sh ./proto/gen.sh
+
+.PHONY: proto-all proto-format proto-lint proto-gen

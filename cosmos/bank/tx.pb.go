@@ -6,13 +6,13 @@ package bank
 import (
 	context "context"
 	fmt "fmt"
+	_ "github.com/cosmos/gogoproto/gogoproto"
+	grpc1 "github.com/cosmos/gogoproto/grpc"
+	proto "github.com/cosmos/gogoproto/proto"
 	github_com_functionx_go_sdk_cosmos_types "github.com/functionx/go-sdk/cosmos/types"
 	types "github.com/functionx/go-sdk/cosmos/types"
 	_ "github.com/functionx/go-sdk/cosmos/types/msgservice"
 	_ "github.com/functionx/go-sdk/proto"
-	_ "github.com/gogo/protobuf/gogoproto"
-	grpc1 "github.com/gogo/protobuf/grpc"
-	proto "github.com/gogo/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -254,9 +254,11 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
-	// Send defines a method for sending coins from one account to another account.
+	// Send defines a method for sending coins from one account to another
+	// account.
 	Send(ctx context.Context, in *MsgSend, opts ...grpc.CallOption) (*MsgSendResponse, error)
-	// MultiSend defines a method for sending coins from some accounts to other accounts.
+	// MultiSend defines a method for sending coins from some accounts to other
+	// accounts.
 	MultiSend(ctx context.Context, in *MsgMultiSend, opts ...grpc.CallOption) (*MsgMultiSendResponse, error)
 }
 
@@ -288,9 +290,11 @@ func (c *msgClient) MultiSend(ctx context.Context, in *MsgMultiSend, opts ...grp
 
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
-	// Send defines a method for sending coins from one account to another account.
+	// Send defines a method for sending coins from one account to another
+	// account.
 	Send(context.Context, *MsgSend) (*MsgSendResponse, error)
-	// MultiSend defines a method for sending coins from some accounts to other accounts.
+	// MultiSend defines a method for sending coins from some accounts to other
+	// accounts.
 	MultiSend(context.Context, *MsgMultiSend) (*MsgMultiSendResponse, error)
 }
 
