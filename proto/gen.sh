@@ -5,7 +5,7 @@ set -eo pipefail
 echo "Generating gogo proto code"
 cd proto
 #buf mod update
-for src in "cosmos" "cosmos_proto" "ethermint" "google" "tendermint" "osmosis" "fx" "ibc" "erc20"; do
+for src in "cosmos" "cosmos_proto" "ethermint" "google" "tendermint" "osmosis" "fx" "ibc"; do
   proto_dirs=$(find "./$src" -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
   for dir in $proto_dirs; do
     proto_files=$(find "${dir}" -maxdepth 1 -name '*.proto')
