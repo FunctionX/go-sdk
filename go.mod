@@ -32,7 +32,7 @@ require (
 	gopkg.in/yaml.v3 v3.0.1
 	gorm.io/driver/mysql v1.5.1
 	gorm.io/driver/sqlite v1.5.2
-	gorm.io/gorm v1.25.3
+	gorm.io/gorm v1.25.4
 	gorm.io/plugin/dbresolver v1.4.3
 	gorm.io/plugin/prometheus v0.0.0-20230504115745-1aec2356381b
 )
