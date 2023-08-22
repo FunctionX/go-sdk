@@ -3,7 +3,7 @@ module github.com/functionx/go-sdk
 go 1.20
 
 require (
-	cosmossdk.io/math v1.0.1
+	cosmossdk.io/math v1.1.2
 	github.com/armon/go-metrics v0.4.1
 	github.com/btcsuite/btcd/btcec/v2 v2.3.2
 	github.com/btcsuite/btcd/btcutil v1.1.3
